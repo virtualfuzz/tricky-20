@@ -1,0 +1,31 @@
+{
+  "name": "tricky-20",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "check": "deno lint -c package.json && deno fmt -c package.json && astro check",
+    "build": "deno task check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.4",
+    "@astrojs/sitemap": "^3.2.1",
+    "@playform/compress": "^0.1.7",
+    "astro": "^5.1.7",
+    "typescript": "^5.7.3"
+  },
+  "lint": {
+    "exclude": [
+      ".deno/",
+      "src/ai.robots.txt/"
+    ]
+  },
+  "fmt": {
+    "exclude": [
+      ".deno/",
+      "src/ai.robots.txt/"
+    ]
+  }
+}
