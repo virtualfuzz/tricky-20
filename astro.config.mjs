@@ -4,6 +4,7 @@ import compress from "@playform/compress";
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://example.org/", // TODO: Temporary until I work on a website
   integrations: [
     sitemap({
       i18n: {

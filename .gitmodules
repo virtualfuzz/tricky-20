@@ -1,0 +1,3 @@
+[submodule "src/ai.robots.txt"]
+	path = src/ai.robots.txt
+	url = https://github.com/ai-robots-txt/ai.robots.txt.git
