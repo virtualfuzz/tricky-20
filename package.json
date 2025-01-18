@@ -1,13 +1,14 @@
 {
-  "name": "tricky-20",
   "type": "module",
+  "name": "tricky-20",
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
     "check": "deno lint -c package.json && deno fmt -c package.json && astro check",
     "build": "deno task check && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "update": "deno outdated --update --latest && git submodule update --remote"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
