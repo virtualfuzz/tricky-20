@@ -1,0 +1,25 @@
+{
+  "puzzle_id": "tutorials/hashy_hashy",
+  "slug": "tutorials/hashy_hashy",
+  "difficulty": "tutorial",
+  "requirements": "linux terminal",
+  "you_will_learn": "learn how to use sha256/sha512 to solve puzzles",
+  "description": "You just downloaded a message in a markdown file from a friend and want to make sure that the file wasn't tempered or corrupted while downloading it. Your friend tells you that the **sha256 checksum** of the file is '6b0dfc9408be2826903dec8fdf4c47f04ac50202f50a70f0bbc19eb37a737737'.",
+  "vocabulary": [
+    { "array": "Fancy computer word for list" },
+    { "string": "A string is an array of characters." },
+    {
+      "hash_aka_checksum": "A file hash (aka as checksum) is a unique string that represents the file content. If a small part of the file changes, the hash changes drastically. It cannot be reversed. It is thus used to verify if the content of a file/message has not been corrupted or tampered with."
+    }
+  ],
+  "hints": [
+    "Hints are encrypted using a caesar cipher: Zpv dpvme (uifsf bsf nvmujqmf xbzt up tpmwf uijt) vtf uif ufsnjobm up tpmwf uijt qvaamf.",
+    "Gps Mjovy, uif dpnnboe up hfu uif tib256tvn pg b gjmf jt 'tib256tvn [GJMFOBNF IFSF]'. Po NbdPT, ju jt 'tibtvn -b 256 [GJMFOBNF IFSF]'. Po Xjoepxt, ju jt 'dfsuVujm -ibtigjmf [GJMFOBNF IFSF] TIB256'.",
+    "Jg zpv bsf tujmm mptu, ju jt dpnqmfufmz plbz boe fwfo fyqfdufe up ep zpvs pxo tfbsdift po uif joufsofu!"
+  ],
+  "goal": "Get the sha256sum of the message file, this is your puzzle key.",
+  "download": "/xoxo/message.md",
+  "submit_to": "/submit",
+  "USED_INTERNALLY_salt_of_solution": "somethiyng_new",
+  "USED_INTERNALLY_sha512_of_solution": "9bcc29f2e406a1a6275e0e32c5f1f8f319f75bdb89e3ca8740ad84aa4225dd2c024fb98cdc817a1064f5012a1a121b5db4a639370e849a4393e3993c242d9aec"
+}
