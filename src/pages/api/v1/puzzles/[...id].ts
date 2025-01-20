@@ -3,6 +3,7 @@ import { getCollection, getEntry } from "astro:content";
 import { createHash } from "node:crypto";
 
 export const prerender = false;
+
 export async function getStaticPaths() {
   const puzzles = await getCollection("puzzles");
   return puzzles.map((puzzle) => ({

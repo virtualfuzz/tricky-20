@@ -1,6 +1,8 @@
 import { getCollection } from "astro:content";
 
-export async function GET({ params, request }) {
+export const prerender = false;
+
+export async function GET({ request }) {
   const { searchParams } = new URL(request.url);
   const search = searchParams.get("search");
 
@@ -14,6 +16,7 @@ export async function GET({ params, request }) {
       }
     })
     .map((puzzle) => ({
+      puzzle_url: "/api/v1/".concat(puzzle.id),
       puzzle_id: puzzle.id,
       you_will_learn: puzzle.data.you_will_learn,
     }));
