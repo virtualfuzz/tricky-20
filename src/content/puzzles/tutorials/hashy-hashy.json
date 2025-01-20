@@ -19,7 +19,6 @@
   ],
   "goal": "Get the sha256sum of the message file, this is your puzzle key.",
   "download": "/xoxo/message.md",
-  "submit_to": "/submit",
   "USED_INTERNALLY_salt_of_solution": "somethiyng_new",
   "USED_INTERNALLY_sha512_of_solution": "ab5609cfedab92222893d5d3a6a42863f9bef5330268d7ac87132d54c2de45be2765f95b07383c92da102a6d3c8995e00fd66f1c6c876e10726c605ef8285e40"
 }

@@ -1,48 +1,34 @@
 import type { APIRoute } from "astro";
-import { getEntry } from "astro:content";
-// TODO: Would use the official deno API if @std/encode worked
+import { getCollection, getEntry } from "astro:content";
 import { createHash } from "node:crypto";
 
-// GET request returns an example on how to use the verify API
-export const GET: APIRoute = () => {
-  return new Response(
-    JSON.stringify(
-      {
-        verify_via_api_post_request: "/api/v1/verify",
-        instruction: "submit to the url provided above using a POST request",
-        format: {
-          puzzle_id: "puzzle_id/here",
-          solution: "string of solution here",
-        },
-        example: {
-          puzzle_id: "tutorials/hashy_hashy",
-          solution: "i need somebody, i want to feel love",
-        },
-        did_you_know: `This works by running adding a salt at the end of the solution (USED_INTERNALLY_salt_of_solution), \
-hashing it with sha512, and comparing it to the expected value in USED_INTERNALLY_sha512_of_solution! \
-Of course you don't really need to know that to use that. But if you want to verify it yourself, you know how now!`,
-      },
-      null,
-      2,
-    ),
-    { headers: { "Content-Type": "application/json" } },
-  );
+export const prerender = false;
+export async function getStaticPaths() {
+  const puzzles = await getCollection("puzzles");
+  return puzzles.map((puzzle) => ({
+    params: { id: puzzle.id },
+    props: { puzzle },
+  }));
+}
+
+// GET request to get the puzzle
+export const GET: APIRoute = async ({ params }) => {
+  const puzzle = await getEntry("puzzles", params.id);
+  puzzle.data["how_to_submit"] =
+    "Submit a solution as a POST request with the same URL your using to get this puzzle.";
+  puzzle.data["example_submission"] = {
+    solution: "I just wish I could see another perspective, one-",
+  };
+
+  return new Response(JSON.stringify(puzzle.data, null, 2), {
+    headers: { "Content-Type": "application/json" },
+  });
 };
 
 // POST request to actually send a solution and verify it
-export const POST: APIRoute = async ({ request }) => {
+export const POST: APIRoute = async ({ request, params }) => {
   // Make sure puzzle_id and solution exists in the json input
   const submission = await request.json();
-  if (submission.puzzle_id === undefined) {
-    return new Response(
-      JSON.stringify({ error: "Where is the puzzle_id?" }, null, 2),
-      {
-        headers: { "Content-Type": "application/json" },
-        status: 400,
-      },
-    );
-  }
-
   if (submission.solution === undefined) {
     return new Response(
       JSON.stringify({ error: "Where is the solution?" }, null, 2),
@@ -53,12 +39,12 @@ export const POST: APIRoute = async ({ request }) => {
     );
   }
 
-  const puzzle = await getEntry("puzzles", submission.puzzle_id);
+  const puzzle = await getEntry("puzzles", params.id);
   if (puzzle === undefined) {
     return new Response(
       JSON.stringify(
         {
-          error: `Puzzle with ${submission.puzzle_id} doesn't exist, are you sure you wrote it right?`,
+          error: `Puzzle with ${params.id} doesn't exist, are you sure you wrote it right?`,
         },
         null,
         2,

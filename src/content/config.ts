@@ -14,7 +14,6 @@ const puzzles = defineCollection({
     hints: z.array(z.string()),
     goal: z.string(),
     download: z.string(),
-    submit_to: z.string(),
     USED_INTERNALLY_salt_of_solution: z.string(),
     USED_INTERNALLY_sha512_of_solution: z.string(),
   }),
