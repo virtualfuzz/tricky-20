@@ -14,7 +14,7 @@ export async function GET({ params, request }) {
       }
     })
     .map((puzzle) => ({
-      id: puzzle.id,
+      puzzle_id: puzzle.id,
       you_will_learn: puzzle.data.you_will_learn,
     }));
 
