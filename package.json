@@ -6,15 +6,23 @@
     "dev": "astro dev",
     "check": "deno lint -c package.json && deno fmt -c package.json && astro check",
     "build": "deno task check && astro build",
-    "preview": "astro preview",
+    "preview": "deno run --allow-net --allow-read --allow-env ./dist/server/entry.mjs",
     "astro": "astro",
+    "drizzle-kit": "drizzle-kit",
     "update": "deno outdated --update --latest && git submodule update --remote"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
     "@astrojs/sitemap": "^3.2.1",
+    "@auth/core": "^0.37.4",
+    "@auth/drizzle-adapter": "^1.7.4",
+    "@deno/astro-adapter": "^0.2.0",
     "@playform/compress": "^0.1.7",
     "astro": "^5.1.7",
+    "auth-astro": "^4.2.0",
+    "drizzle-kit": "^0.30.2",
+    "drizzle-orm": "^0.38.4",
+    "postgres": "^3.4.5",
     "typescript": "^5.7.3"
   },
   "lint": {

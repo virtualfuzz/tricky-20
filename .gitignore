@@ -22,3 +22,9 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# contains secrets
+.env
+
+# drizzle is specific to the database
+drizzle/
