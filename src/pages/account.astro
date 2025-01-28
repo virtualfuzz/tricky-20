@@ -1,18 +1,27 @@
 ---
 import { SignIn, SignOut } from "auth-astro/components";
 import { getSession } from "auth-astro/server";
+import { db, apiKeys } from "../db/schema.ts";
+import { eq } from "drizzle-orm";
 
 const session = await getSession(Astro.request);
 
-// api key generation
-// api key revoking
-
+// Get minDate and maxDate of the API key expiration
 const minDate = new Date();
 const minString = minDate.toISOString().split("T")[0];
 
 const maxDate = new Date();
 maxDate.setDate(maxDate.getDate() + 365);
 const maxString = maxDate.toISOString().split("T")[0];
+
+let api_keys;
+
+if (session) {
+    api_keys = await db
+        .select()
+        .from(apiKeys)
+        .where(eq(apiKeys.userId, session.userId));
+}
 ---
 
 <html>
@@ -28,7 +37,7 @@ const maxString = maxDate.toISOString().split("T")[0];
 
         {
             session ? (
-                <label>
+                <>
                     <p>Welcome {session.user?.name}</p>
                     <form method="POST" action="/key">
                         <label>
@@ -43,7 +52,33 @@ const maxString = maxDate.toISOString().split("T")[0];
                         </label>
                         <button type="submit">Generate New API Key</button>
                     </form>
-                </label>
+                    <table>
+                        <tr>
+                            <th>Last 8 characters of your API key</th>
+                            <th>Creation date of your API key</th>
+                            <th>Expire date of your API key</th>
+                        </tr>
+                        {api_keys.map((api_key) => (
+                            <tr>
+                                <th>{api_key.last8Chars}</th>
+                                <th>
+                                    {
+                                        api_key.creationDate
+                                            .toISOString()
+                                            .split("T")[0]
+                                    }
+                                </th>
+                                <th>
+                                    {
+                                        api_key.expireDate
+                                            .toISOString()
+                                            .split("T")[0]
+                                    }
+                                </th>
+                            </tr>
+                        ))}
+                    </table>
+                </>
             ) : (
                 <p>Not logged in</p>
             )
