@@ -39,7 +39,7 @@ if (session) {
             session ? (
                 <>
                     <p>Welcome {session.user?.name}</p>
-                    <form method="POST" action="/key">
+                    <form method="POST" action="/key/new">
                         <label>
                             Expiry date of the API key:
                             <input
@@ -52,32 +52,53 @@ if (session) {
                         </label>
                         <button type="submit">Generate New API Key</button>
                     </form>
-                    <table>
-                        <tr>
-                            <th>Last 8 characters of your API key</th>
-                            <th>Creation date of your API key</th>
-                            <th>Expire date of your API key</th>
-                        </tr>
-                        {api_keys.map((api_key) => (
+                    {api_keys.length > 0 ? (
+                        <table>
                             <tr>
-                                <th>{api_key.last8Chars}</th>
-                                <th>
-                                    {
-                                        api_key.creationDate
-                                            .toISOString()
-                                            .split("T")[0]
-                                    }
-                                </th>
-                                <th>
-                                    {
-                                        api_key.expireDate
-                                            .toISOString()
-                                            .split("T")[0]
-                                    }
-                                </th>
+                                <th>Last 8 characters of your API key</th>
+                                <th>Creation date of your API key</th>
+                                <th>Expire date of your API key</th>
+                                <th>API key actions</th>
                             </tr>
-                        ))}
-                    </table>
+                            {api_keys.map((api_key) => (
+                                <tr>
+                                    <th>{api_key.last8Chars}</th>
+                                    <th>
+                                        {
+                                            api_key.creationDate
+                                                .toISOString()
+                                                .split("T")[0]
+                                        }
+                                    </th>
+                                    <th>
+                                        {
+                                            api_key.expireDate
+                                                .toISOString()
+                                                .split("T")[0]
+                                        }
+                                    </th>
+                                    <th>
+                                        <form
+                                            method="POST"
+                                            action="/key/revoke"
+                                        >
+                                            <input
+                                                name="apiKeyId"
+                                                type="hidden"
+                                                value={api_key.id}
+                                                required
+                                            />
+                                            <button type="submit">
+                                                Revoke and delete key
+                                            </button>
+                                        </form>
+                                    </th>
+                                </tr>
+                            ))}
+                        </table>
+                    ) : (
+                        <p>You do not have any API keys.</p>
+                    )}
                 </>
             ) : (
                 <p>Not logged in</p>

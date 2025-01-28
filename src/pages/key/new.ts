@@ -1,10 +1,11 @@
 import { APIRoute } from "astro";
 import { getSession } from "auth-astro/server";
 import { randomBytes, createHash } from "node:crypto";
-import { db, apiKeys } from "../db/schema.ts";
+import { db, apiKeys } from "../../db/schema.ts";
 
 export const prerender = false;
 
+// make it expire when the date is reached
 export const POST: APIRoute = async ({ request }) => {
   // Make sure user is logged in
   const session = await getSession(request);
@@ -54,7 +55,7 @@ export const POST: APIRoute = async ({ request }) => {
   const maxExpireDate = new Date();
   maxExpireDate.setDate(maxExpireDate.getDate() + 365);
   const expireDate = new Date(date.toString());
-  if (maxExpireDate < expireDate) {
+  if (maxExpireDate <= expireDate) {
     return new Response(
       JSON.stringify(
         {

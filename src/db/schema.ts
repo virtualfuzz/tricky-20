@@ -58,7 +58,11 @@ export const sessions = pgTable("session", {
 });
 
 export const apiKeys = pgTable("apiKeys", {
-  keySha512: text("keySha512").primaryKey().notNull(),
+  id: text("id")
+    .primaryKey()
+    .unique()
+    .$defaultFn(() => crypto.randomUUID()),
+  keySha512: text("keySha512").notNull(),
   last8Chars: text("last8Chars").notNull(),
   userId: text("userId")
     .notNull()
