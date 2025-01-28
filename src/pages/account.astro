@@ -1,0 +1,52 @@
+---
+import { SignIn, SignOut } from "auth-astro/components";
+import { getSession } from "auth-astro/server";
+
+const session = await getSession(Astro.request);
+
+// api key generation
+// api key revoking
+
+const minDate = new Date();
+const minString = minDate.toISOString().split("T")[0];
+
+const maxDate = new Date();
+maxDate.setDate(maxDate.getDate() + 365);
+const maxString = maxDate.toISOString().split("T")[0];
+---
+
+<html>
+    <body>
+        <noscript
+            >Warning, unfortunately, for logging in, you need to turn on
+            javascript, other operations should not require javascript, if they
+            do, do not hesitate to file a bug report!</noscript
+        >
+
+        <SignIn>Login</SignIn>
+        <SignOut>Logout</SignOut>
+
+        {
+            session ? (
+                <label>
+                    <p>Welcome {session.user?.name}</p>
+                    <form method="POST" action="/key">
+                        <label>
+                            Expiry date of the API key:
+                            <input
+                                name="expireDate"
+                                type="date"
+                                min={minString}
+                                max={maxString}
+                                required
+                            />
+                        </label>
+                        <button type="submit">Generate New API Key</button>
+                    </form>
+                </label>
+            ) : (
+                <p>Not logged in</p>
+            )
+        }
+    </body>
+</html>

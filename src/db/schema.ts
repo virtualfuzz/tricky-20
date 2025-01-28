@@ -1,9 +1,9 @@
 import {
-  timestamp,
-  pgTable,
-  text,
-  primaryKey,
   integer,
+  pgTable,
+  primaryKey,
+  text,
+  timestamp,
 } from "drizzle-orm/pg-core";
 import postgres from "postgres";
 import { drizzle } from "drizzle-orm/postgres-js";
@@ -55,4 +55,17 @@ export const sessions = pgTable("session", {
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
   expires: timestamp("expires", { mode: "date" }).notNull(),
+});
+
+export const apiKeys = pgTable("apiKeys", {
+  keySha512: text("keySha512").primaryKey().notNull(),
+  last8Chars: text("last8Chars").notNull(),
+  userId: text("userId")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  creationDate: timestamp("creationDate", { mode: "date" })
+    .notNull()
+    .defaultNow(),
+  lastAccessedDate: timestamp("lastAccessedDate", { mode: "date" }),
+  expireDate: timestamp("expireDate", { mode: "date" }).notNull(),
 });

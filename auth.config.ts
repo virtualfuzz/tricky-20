@@ -2,7 +2,7 @@
 import GitHub from "@auth/core/providers/github";
 import { defineConfig } from "auth-astro";
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
-import { db } from "./schema.ts";
+import { db } from "./src/db/schema.ts";
 
 export default defineConfig({
   adapter: DrizzleAdapter(db),
