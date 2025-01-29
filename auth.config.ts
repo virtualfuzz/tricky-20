@@ -10,6 +10,12 @@ export default defineConfig({
     GitHub({
       clientId: import.meta.env.GITHUB_CLIENT_ID,
       clientSecret: import.meta.env.GITHUB_CLIENT_SECRET,
+      profile(profile) {
+        return {
+          id: profile.id.toString(),
+          name: profile.login,
+        };
+      },
     }),
   ],
   callbacks: {
