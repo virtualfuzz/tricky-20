@@ -1,6 +1,5 @@
 import type { APIRoute } from "astro";
 import { type CollectionEntry, getCollection, getEntry } from "astro:content";
-import { createHash } from "node:crypto";
 import { checkSolution } from "../../../../scripts/solution.ts";
 
 export const prerender = false;
@@ -27,7 +26,8 @@ export const GET: APIRoute = async ({ params }) => {
     return new Response(
       JSON.stringify(
         {
-          error: `Puzzle with ${params.id} doesn't exist, are you sure you wrote it right?`,
+          error:
+            `Puzzle with ${params.id} doesn't exist, are you sure you wrote it right?`,
         },
         null,
         2,
@@ -66,7 +66,14 @@ export const POST: APIRoute = async ({ request, params }) => {
   try {
     submission = await request.json();
   } catch (e) {
-    return new Response(JSON.stringify({ error: e.message }, null, 2), {
+    let error = "";
+    if (e instanceof Error) {
+      error = e.message;
+    } else {
+      error = "CRITICAL Report as bug! An unknown error occured";
+    }
+
+    return new Response(JSON.stringify({ error }, null, 2), {
       headers: { "Content-Type": "application/json" },
       status: 400,
     });
@@ -92,10 +99,17 @@ export const POST: APIRoute = async ({ request, params }) => {
   try {
     valid_solution = await checkSolution(params.id, submission.solution);
   } catch (e) {
+    let error = "";
+    if (e instanceof Error) {
+      error = e.message;
+    } else {
+      error = "CRITICAL Report as bug! An unknown error occured";
+    }
+
     return new Response(
       JSON.stringify(
         {
-          error: e.message,
+          error,
         },
         null,
         2,
