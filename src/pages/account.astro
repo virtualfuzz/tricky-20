@@ -15,12 +15,20 @@ maxDate.setDate(maxDate.getDate() + 365);
 const maxString = maxDate.toISOString().split("T")[0];
 
 let api_keys;
-
+let api_key_error;
 if (session) {
-    api_keys = await db
-        .select()
-        .from(apiKeys)
-        .where(eq(apiKeys.userId, session.userId));
+    if (session.user !== undefined) {
+        if (session.user.id !== undefined) {
+            api_keys = await db
+                .select()
+                .from(apiKeys)
+                .where(eq(apiKeys.userId, session.user.id.toString()));
+        } else {
+            api_key_error = "session.user.id is undefined";
+        }
+    } else {
+        api_key_error = "session.user is undefined";
+    }
 }
 ---
 
@@ -41,7 +49,7 @@ if (session) {
                     <p>Welcome {session.user?.name}</p>
                     <form method="POST" action="/key/new">
                         <label>
-                            Expiry date of the API key:
+                            Expiry date of the new API key:
                             <input
                                 name="expireDate"
                                 type="date"
@@ -52,7 +60,7 @@ if (session) {
                         </label>
                         <button type="submit">Generate New API Key</button>
                     </form>
-                    {api_keys.length > 0 ? (
+                    {api_keys && api_keys.length > 0 ? (
                         <table>
                             <tr>
                                 <th>Last 8 characters of your API key</th>
@@ -96,6 +104,12 @@ if (session) {
                                 </tr>
                             ))}
                         </table>
+                    ) : api_key_error ? (
+                        <p>
+                            Failed to find API keys for your user:{" "}
+                            {api_key_error}, please report this as a bug with
+                            the current page URL!
+                        </p>
                     ) : (
                         <p>You do not have any API keys.</p>
                     )}

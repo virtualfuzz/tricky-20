@@ -1,6 +1,6 @@
-import { APIRoute } from "astro";
+import type { APIRoute } from "astro";
 import { getSession } from "auth-astro/server";
-import { db, apiKeys } from "../../db/schema.ts";
+import { apiKeys, db } from "../../db/schema.ts";
 import { eq } from "drizzle-orm";
 
 export const prerender = false;
@@ -54,8 +54,7 @@ export const POST: APIRoute = async ({ request }) => {
     return new Response(
       JSON.stringify(
         {
-          error:
-            "We require apiKeyId to be passed in the form data.\
+          error: "We require apiKeyId to be passed in the form data.\
             apiKeyId is the internal id of the api key.",
         },
         null,
@@ -71,15 +70,14 @@ export const POST: APIRoute = async ({ request }) => {
   const apiKey_item = await db
     .select()
     .from(apiKeys)
-    .where(eq(apiKeys.id, apiKeyId));
+    .where(eq(apiKeys.id, apiKeyId.toString()));
 
   // Make sure the api key is there
   if (apiKey_item.length <= 0) {
     return new Response(
       JSON.stringify(
         {
-          error:
-            "Couldn't find API key with apiKeyId as an id.\
+          error: "Couldn't find API key with apiKeyId as an id.\
               apiKeyId is the internal id of the api key.",
         },
         null,
@@ -92,14 +90,16 @@ export const POST: APIRoute = async ({ request }) => {
     );
   }
 
-  //Actuaally delete the API key
-  await db.delete(apiKeys).where(eq(apiKeys.id, apiKeyId));
+  // Actually delete the API key
+  await db.delete(apiKeys).where(eq(apiKeys.id, apiKeyId.toString()));
 
   // Return success
   return new Response(
     JSON.stringify(
       {
-        message: `Successfully deleted the API key ending with ${apiKey_item[0].last8Chars}`,
+        message: `Successfully deleted the API key ending with ${
+          apiKey_item[0]!.last8Chars
+        }`,
       },
       null,
       2,

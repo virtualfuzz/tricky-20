@@ -1,7 +1,7 @@
-import { APIRoute } from "astro";
+import type { APIRoute } from "astro";
 import { getSession } from "auth-astro/server";
-import { randomBytes, createHash } from "node:crypto";
-import { db, apiKeys } from "../../db/schema.ts";
+import { createHash, randomBytes } from "node:crypto";
+import { apiKeys, db } from "../../db/schema.ts";
 
 export const prerender = false;
 
@@ -45,6 +45,18 @@ export const POST: APIRoute = async ({ request }) => {
     );
   }
 
+  if (session.user === undefined) {
+    throw new Error(
+      "session.user is undefined, please report as bug with the current url",
+    );
+  }
+
+  if (session.user.id === undefined) {
+    throw new Error(
+      "session.user.id is undefined, please report as bug with the current url",
+    );
+  }
+
   // Get expireDate from form data
   const data = await request.formData();
   const date = data.get("expireDate");
@@ -54,8 +66,7 @@ export const POST: APIRoute = async ({ request }) => {
     return new Response(
       JSON.stringify(
         {
-          error:
-            "We require expireDate to be passed in the form data.\
+          error: "We require expireDate to be passed in the form data.\
             expireDate is the date in which this API key expires and is unusable.\
             expireDate also needs to be in the future and not further then 1 year in the future.",
         },
@@ -78,8 +89,7 @@ export const POST: APIRoute = async ({ request }) => {
       JSON.stringify(
         {
           error: "expireDate is too far into the future",
-          message:
-            "expireDate cannot be further then 1 year into the future.\
+          message: "expireDate cannot be further then 1 year into the future.\
           expireDate is the date in which this API key expires and is unusable.\
             expireDate also needs to be in the future and not further then 1 year in the future.",
         },
@@ -122,7 +132,7 @@ export const POST: APIRoute = async ({ request }) => {
   // Create api key item and put it into the database
   const api_key: typeof apiKeys.$inferInsert = {
     last8Chars: apiKey.substring(apiKey.length - 8), // stored as an identifier of the api key
-    userId: session.userId,
+    userId: session.user.id,
     keySha512,
     expireDate,
   };

@@ -1,8 +1,9 @@
 import { getCollection } from "astro:content";
+import type { APIContext } from "astro";
 
 export const prerender = false;
 
-export async function GET({ request }) {
+export async function GET({ request }: APIContext) {
   const { searchParams } = new URL(request.url);
   const search = searchParams.get("search");
 
@@ -21,10 +22,13 @@ export async function GET({ request }) {
       you_will_learn: puzzle.data.you_will_learn,
     }));
 
-  const puzzleHashmap = puzzleList.reduce((acc, puzzle) => {
-    acc[puzzle.puzzle_id] = puzzle;
-    return acc;
-  }, {});
+  const puzzleHashmap = puzzleList.reduce(
+    (acc: { [key: string]: typeof puzzle }, puzzle) => {
+      acc[puzzle.puzzle_id] = puzzle;
+      return acc;
+    },
+    {},
+  );
 
   return new Response(JSON.stringify(puzzleHashmap, null, 2), {
     headers: { "Content-Type": "application/json" },

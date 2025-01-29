@@ -7,8 +7,13 @@ import {
 } from "drizzle-orm/pg-core";
 import postgres from "postgres";
 import { drizzle } from "drizzle-orm/postgres-js";
-import type { AdapterAccountType } from "next-auth/adapters";
+import type { AdapterAccount } from "next-auth/adapters";
 import "dotenv/config";
+import process from "node:process";
+
+if (process.env.DATABASE_URL === undefined) {
+  throw new Error("DATABASE_URL is undefined, define it in .env");
+}
 
 const pool = postgres(process.env.DATABASE_URL, { max: 1 });
 
@@ -30,7 +35,7 @@ export const accounts = pgTable(
     userId: text("userId")
       .notNull()
       .references(() => users.id, { onDelete: "cascade" }),
-    type: text("type").$type<AdapterAccountType>().notNull(),
+    type: text("type").$type<AdapterAccount>().notNull(),
     provider: text("provider").notNull(),
     providerAccountId: text("providerAccountId").notNull(),
     refresh_token: text("refresh_token"),

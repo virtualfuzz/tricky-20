@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { getCollection, getEntry } from "astro:content";
+import { type CollectionEntry, getCollection, getEntry } from "astro:content";
 import { createHash } from "node:crypto";
 
 export const prerender = false;
@@ -14,10 +14,41 @@ export async function getStaticPaths() {
 
 // GET request to get the puzzle
 export const GET: APIRoute = async ({ params }) => {
+  if (params.id === undefined) {
+    throw new Error(
+      "params.id is undefined, please report as bug with the current url",
+    );
+  }
+
   const puzzle = await getEntry("puzzles", params.id);
-  puzzle.data["how_to_submit"] =
+
+  if (puzzle === undefined) {
+    return new Response(
+      JSON.stringify(
+        {
+          error:
+            `Puzzle with ${params.id} doesn't exist, are you sure you wrote it right?`,
+        },
+        null,
+        2,
+      ),
+      {
+        headers: { "Content-Type": "application/json" },
+        status: 404,
+      },
+    );
+  }
+
+  interface Puzzle extends CollectionEntry<"puzzles"> {
+    data: CollectionEntry<"puzzles">["data"] & {
+      how_to_submit?: string;
+      example_submission?: { solution: string };
+    };
+  }
+
+  (puzzle as Puzzle).data["how_to_submit"] =
     "Submit a solution as a POST request with the same URL your using to get this puzzle.";
-  puzzle.data["example_submission"] = {
+  (puzzle as Puzzle).data["example_submission"] = {
     solution: "I just wish I could see another perspective, one-",
   };
 
@@ -40,12 +71,19 @@ export const POST: APIRoute = async ({ request, params }) => {
     );
   }
 
+  if (params.id === undefined) {
+    throw new Error(
+      "For some reason params.id is undefined? Please report this as a bug with the current url!",
+    );
+  }
+
   const puzzle = await getEntry("puzzles", params.id);
   if (puzzle === undefined) {
     return new Response(
       JSON.stringify(
         {
-          error: `Puzzle with ${params.id} doesn't exist, are you sure you wrote it right?`,
+          error:
+            `Puzzle with ${params.id} doesn't exist, are you sure you wrote it right?`,
         },
         null,
         2,
