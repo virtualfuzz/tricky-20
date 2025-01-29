@@ -10,7 +10,11 @@ export async function GET({ request }: APIContext) {
   const provider = searchParams.get("provider");
 
   const users_to_show = await db
-    .select({ id: users.id, username: users.name, provider: accounts.provider })
+    .select({
+      profile_id: users.id,
+      username: users.name,
+      provider: accounts.provider,
+    })
     .from(users)
     .leftJoin(accounts, eq(users.id, accounts.userId))
     .where(
@@ -21,8 +25,11 @@ export async function GET({ request }: APIContext) {
     );
 
   const users_hashmap = users_to_show.reduce(
-    (acc: { [key: string]: typeof user }, user) => {
-      acc[user.id] = user;
+    (acc: { [key: string]: typeof user & { profile_url: string } }, user) => {
+      acc[user.profile_id] = {
+        profile_url: `/api/v1/profiles/${user.profile_id}`,
+        ...user,
+      };
       return acc;
     },
     {},
