@@ -1,6 +1,7 @@
 import type { APIRoute } from "astro";
 import { type CollectionEntry, getCollection, getEntry } from "astro:content";
 import { createHash } from "node:crypto";
+import { checkSolution } from "../../../../scripts/solution.ts";
 
 export const prerender = false;
 
@@ -26,8 +27,7 @@ export const GET: APIRoute = async ({ params }) => {
     return new Response(
       JSON.stringify(
         {
-          error:
-            `Puzzle with ${params.id} doesn't exist, are you sure you wrote it right?`,
+          error: `Puzzle with ${params.id} doesn't exist, are you sure you wrote it right?`,
         },
         null,
         2,
@@ -61,6 +61,7 @@ export const GET: APIRoute = async ({ params }) => {
 export const POST: APIRoute = async ({ request, params }) => {
   // Make sure puzzle_id and solution exists in the json input
   const submission = await request.json();
+  // what if its not json
   if (submission.solution === undefined) {
     return new Response(
       JSON.stringify({ error: "Where is the solution?" }, null, 2),
@@ -77,34 +78,29 @@ export const POST: APIRoute = async ({ request, params }) => {
     );
   }
 
-  const puzzle = await getEntry("puzzles", params.id);
-  if (puzzle === undefined) {
+  let valid_solution = false;
+  try {
+    valid_solution = await checkSolution(params.id, submission.solution);
+  } catch (e) {
     return new Response(
       JSON.stringify(
         {
-          error:
-            `Puzzle with ${params.id} doesn't exist, are you sure you wrote it right?`,
+          error: e.message,
         },
         null,
         2,
       ),
       {
         headers: { "Content-Type": "application/json" },
-        status: 404,
+        status: 400,
       },
     );
   }
 
-  // Add a salt to the solution and hash it using sha512
-  const saltedSolution = submission.solution.concat(
-    puzzle.data.USED_INTERNALLY_salt_of_solution,
-  );
-  const hashBuffer = createHash("sha512").update(saltedSolution).digest("hex");
-
   // Check the hash and return the response
   let response;
   let status;
-  if (hashBuffer === puzzle.data.USED_INTERNALLY_sha512_of_solution) {
+  if (valid_solution === true) {
     status = 200;
     response = {
       valid_solution: true,
