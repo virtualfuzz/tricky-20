@@ -60,8 +60,18 @@ export const GET: APIRoute = async ({ params }) => {
 // POST request to actually send a solution and verify it
 export const POST: APIRoute = async ({ request, params }) => {
   // Make sure puzzle_id and solution exists in the json input
-  const submission = await request.json();
-  // what if its not json
+  let submission = undefined;
+
+  // Make sure it is proper json
+  try {
+    submission = await request.json();
+  } catch (e) {
+    return new Response(JSON.stringify({ error: e.message }, null, 2), {
+      headers: { "Content-Type": "application/json" },
+      status: 400,
+    });
+  }
+
   if (submission.solution === undefined) {
     return new Response(
       JSON.stringify({ error: "Where is the solution?" }, null, 2),
