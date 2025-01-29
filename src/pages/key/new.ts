@@ -5,7 +5,25 @@ import { db, apiKeys } from "../../db/schema.ts";
 
 export const prerender = false;
 
-// make it expire when the date is reached
+export function GET() {
+  return new Response(
+    JSON.stringify(
+      {
+        what_is_this: "This is a POST endpoint used to generate new API keys.",
+        how_to_use:
+          "You cannot generate API keys using API keys (I really don't think this is a good idea), so you must be logged in online and use your browser to generate a new API key.",
+        how_does_this_work:
+          "Once if gets a POST request, it looks into the formData and gets expireDate (which is the expire date of the API key), then it creates and adds a new API key.",
+      },
+      null,
+      2,
+    ),
+    {
+      headers: { "Content-Type": "application/json" },
+    },
+  );
+}
+
 export const POST: APIRoute = async ({ request }) => {
   // Make sure user is logged in
   const session = await getSession(request);

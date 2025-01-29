@@ -5,7 +5,25 @@ import { eq } from "drizzle-orm";
 
 export const prerender = false;
 
-// make it expire when the date is reached
+export function GET() {
+  return new Response(
+    JSON.stringify(
+      {
+        what_is_this: "This is a POST endpoint used to revoke API keys.",
+        how_to_use:
+          "You cannot revoke API keys using API keys (I really don't think this is a good idea). You must be logged in online and use your browser to revoke a new API key.",
+        how_does_this_work:
+          "Once if gets a POST request, it looks into the formData and gets apiKeyId (which is the id of the API key), then it deletes the API key from the database.",
+      },
+      null,
+      2,
+    ),
+    {
+      headers: { "Content-Type": "application/json" },
+    },
+  );
+}
+
 export const POST: APIRoute = async ({ request }) => {
   // Make sure user is logged in
   const session = await getSession(request);
