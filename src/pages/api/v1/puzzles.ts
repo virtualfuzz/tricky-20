@@ -16,12 +16,17 @@ export async function GET({ request }) {
       }
     })
     .map((puzzle) => ({
-      puzzle_url: "/api/v1/".concat(puzzle.id),
+      puzzle_url: "/api/v1/puzzles/".concat(puzzle.id),
       puzzle_id: puzzle.id,
       you_will_learn: puzzle.data.you_will_learn,
     }));
 
-  return new Response(JSON.stringify(puzzleList, null, 2), {
+  const puzzleHashmap = puzzleList.reduce((acc, puzzle) => {
+    acc[puzzle.puzzle_id] = puzzle;
+    return acc;
+  }, {});
+
+  return new Response(JSON.stringify(puzzleHashmap, null, 2), {
     headers: { "Content-Type": "application/json" },
   });
 }
