@@ -3,7 +3,7 @@
   "name": "tricky-20",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
+    "dev": "astro dev --env-file .env",
     "check": "deno lint -c package.json && deno fmt -c package.json && astro check",
     "build": "deno task check && astro build",
     "preview": "deno run --allow-net --allow-read --allow-env ./dist/server/entry.mjs",
@@ -20,6 +20,7 @@
     "@playform/compress": "^0.1.7",
     "astro": "^5.1.7",
     "auth-astro": "^4.2.0",
+    "dotenv": "^16.4.7",
     "drizzle-kit": "^0.30.2",
     "drizzle-orm": "^0.38.4",
     "postgres": "^3.4.5",
