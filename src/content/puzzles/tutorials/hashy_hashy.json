@@ -4,7 +4,7 @@
   "difficulty": "tutorial",
   "requirements": "linux terminal",
   "you_will_learn": "learn how to use sha256/sha512 to solve puzzles",
-  "description": "You just downloaded a message in a markdown file from a friend and want to make sure that the file wasn't tempered or corrupted while downloading it. Your friend tells you that the **sha256 checksum** of the file is '6b0dfc9408be2826903dec8fdf4c47f04ac50202f50a70f0bbc19eb37a737737'.",
+  "description": "You just downloaded a message in a markdown file from a friend and want to make sure that the file wasn't tempered or corrupted while downloading it. Your friend tells you that the **sha256 checksum** of the file is '6b0dfc9408be2826903dec8fdf4c47f04ac50202f50a70f0bbc19eb37a737737'. ",
   "vocabulary": [
     { "array": "Fancy computer word for list" },
     { "string": "A string is an array of characters." },
@@ -20,5 +20,5 @@
   "goal": "Get the sha256sum of the message file, this is your puzzle key.",
   "download": "/xoxo/message.md",
   "USED_INTERNALLY_salt_of_solution": "somethiyng_new",
-  "USED_INTERNALLY_sha512_of_solution": "ab5609cfedab92222893d5d3a6a42863f9bef5330268d7ac87132d54c2de45be2765f95b07383c92da102a6d3c8995e00fd66f1c6c876e10726c605ef8285e40"
+  "USED_INTERNALLY_sha512_of_solution": "ed6f3d3bbfd5dd2a4206faf6925dabdc012c880033d053b2868a166520e679dd729dd07b2feb54538c1070f949573fe277c854de00c5f1588702346651f2db20"
 }
