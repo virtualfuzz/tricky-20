@@ -1,6 +1,7 @@
 import { accounts, db, users } from "../../../../db/schema.ts";
 import { eq } from "drizzle-orm";
-import type { APIContext } from "astro";
+import type { APIContext, APIRoute } from "astro";
+import { checkSolutionAPI } from "../../../../scripts/solution.ts";
 
 export const prerender = false;
 
@@ -36,3 +37,7 @@ export async function GET({ params }: APIContext) {
     headers: { "Content-Type": "application/json" },
   });
 }
+
+export const POST: APIRoute = async ({ request }) => {
+  return await checkSolutionAPI(true, request);
+};

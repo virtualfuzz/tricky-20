@@ -131,7 +131,7 @@ export const POST: APIRoute = async ({ request }) => {
 
   // Create api key item and put it into the database
   const api_key: typeof apiKeys.$inferInsert = {
-    last8Chars: apiKey.substring(apiKey.length - 8), // stored as an identifier of the api key
+    first8Chars: apiKey.substring(0, 8), // stored as an identifier of the api key
     userId: session.user.id,
     keySha512,
     expireDate,

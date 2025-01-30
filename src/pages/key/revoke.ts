@@ -73,7 +73,7 @@ export const POST: APIRoute = async ({ request }) => {
     .where(eq(apiKeys.id, apiKeyId.toString()));
 
   // Make sure the api key is there
-  if (apiKey_item.length <= 0) {
+  if (apiKey_item[0] === undefined) {
     return new Response(
       JSON.stringify(
         {
@@ -98,7 +98,7 @@ export const POST: APIRoute = async ({ request }) => {
     JSON.stringify(
       {
         message: `Successfully deleted the API key ending with ${
-          apiKey_item[0]!.last8Chars
+          apiKey_item[0].first8Chars
         }`,
       },
       null,

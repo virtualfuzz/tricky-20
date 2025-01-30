@@ -69,13 +69,26 @@ export const apiKeys = pgTable("apiKeys", {
     .unique()
     .$defaultFn(() => crypto.randomUUID()),
   keySha512: text("keySha512").notNull(),
-  last8Chars: text("last8Chars").notNull(),
+  first8Chars: text("first8Chars").notNull(),
   userId: text("userId")
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
   creationDate: timestamp("creationDate", { mode: "date" })
     .notNull()
     .defaultNow(),
-  lastAccessedDate: timestamp("lastAccessedDate", { mode: "date" }),
+  lastUsedDate: timestamp("lastUsedDate", { mode: "date" }),
   expireDate: timestamp("expireDate", { mode: "date" }).notNull(),
+});
+
+export const solutions = pgTable("solutions", {
+  id: text("id")
+    .primaryKey()
+    .unique()
+    .$defaultFn(() => crypto.randomUUID()),
+  userId: text("userId")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  puzzleId: text("puzzleId").notNull(),
+  sha512Solution: text("sha512Solution").notNull(),
+  saltSolution: text("saltSolution").notNull(),
 });

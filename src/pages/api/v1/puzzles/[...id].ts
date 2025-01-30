@@ -26,7 +26,8 @@ export const GET: APIRoute = async ({ params }) => {
     return new Response(
       JSON.stringify(
         {
-          error: `Puzzle with ${params.id} doesn't exist, are you sure you wrote it right?`,
+          error:
+            `Puzzle with ${params.id} doesn't exist, are you sure you wrote it right?`,
         },
         null,
         2,
@@ -58,12 +59,5 @@ export const GET: APIRoute = async ({ params }) => {
 
 // POST request to actually send a solution and verify it
 export const POST: APIRoute = async ({ request, params }) => {
-  // Make sure params.id
-  if (params.id === undefined) {
-    throw new Error(
-      "For some reason params.id is undefined? Please report this as a bug with the current url!",
-    );
-  }
-
-  return await checkSolutionAPI(request, params.id);
+  return await checkSolutionAPI(false, request, params.id);
 };

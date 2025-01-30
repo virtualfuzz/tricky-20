@@ -8,6 +8,7 @@ const session = await getSession(Astro.request);
 
 // Get minDate and maxDate of the API key expiration
 const minDate = new Date();
+minDate.setDate(minDate.getDate() + 1);
 const minString = minDate.toISOString().split("T")[0];
 
 const maxDate = new Date();
@@ -45,7 +46,7 @@ if (session) {
 
         {
             session ? (
-                <>
+                <tr>
                     <p>Welcome {session.user?.name}</p>
                     <form method="POST" action="/key/new">
                         <label>
@@ -63,14 +64,19 @@ if (session) {
                     {api_keys && api_keys.length > 0 ? (
                         <table>
                             <tr>
-                                <th>Last 8 characters of your API key</th>
-                                <th>Creation date of your API key</th>
-                                <th>Expire date of your API key</th>
+                                <th>Your Api keys</th>
+                            </tr>
+                            <tr>
+                                <th>First 8 characters</th>
+                                <th>Creation date</th>
+                                <th>Expire date</th>
+                                <th>Last used date</th>
+                                <th>Expired</th>
                                 <th>API key actions</th>
                             </tr>
                             {api_keys.map((api_key) => (
                                 <tr>
-                                    <th>{api_key.last8Chars}</th>
+                                    <th>{api_key.first8Chars}</th>
                                     <th>
                                         {
                                             api_key.creationDate
@@ -84,6 +90,18 @@ if (session) {
                                                 .toISOString()
                                                 .split("T")[0]
                                         }
+                                    </th>
+                                    <th>
+                                        {api_key.lastUsedDate
+                                            ? api_key.lastUsedDate
+                                                  .toISOString()
+                                                  .split("T")[0]
+                                            : "Never used before"}
+                                    </th>
+                                    <th>
+                                        {api_key.expireDate <= new Date()
+                                            ? "Yes"
+                                            : "No"}
                                     </th>
                                     <th>
                                         <form
@@ -113,7 +131,7 @@ if (session) {
                     ) : (
                         <p>You do not have any API keys.</p>
                     )}
-                </>
+                </tr>
             ) : (
                 <p>Not logged in</p>
             )
