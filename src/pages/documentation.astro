@@ -1,0 +1,69 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navbar from "../components/Navbar.astro";
+---
+
+<BaseLayout title="API Documentation">
+    <Navbar />
+
+    <h1>API Documentation</h1>
+    <p>v1.0.0</p>
+    <p>Access it though /api/v1/</p>
+
+    <p>You can use curl to interact with this API though the terminal.</p>
+
+    <h2>/api/v1/profiles</h2>
+    <h3>GET request</h3>
+    <p>Optional parameters (as GET parameters)</p>
+    <ul>
+        <li>username: search for a username, case insensitive</li>
+        <li>
+            provider: only show accounts with a specific provider, case
+            insensitive
+        </li>
+    </ul>
+    <p>Lists every single profile/account</p>
+
+    <h2>/api/v1/profiles/USER_ID_HERE</h2>
+    <h3>GET request</h3>
+    <p>
+        Lists one specific complete user profile, including it's completed
+        puzzles
+    </p>
+
+    <h3>POST request</h3>
+    <p>
+        Authentification using an <a href="/account">API key is required</a>
+    </p>
+    <p>Required parameters (as JSON)</p>
+    <ul>
+        <li>puzzleId: The id of the puzzle you solved</li>
+        <li>solution: The solution to the puzzle</li>
+    </ul>
+    <p>
+        Used to save completed puzzles inside of your user account/verify if it
+        is a valid solution.
+    </p>
+
+    <h2>/api/v1/puzzles</h2>
+    <h3>GET request</h3>
+    <p>Optional parameters (as GET parameters)</p>
+    <ul>
+        <li>search: search for a puzzle/group of puzzles, case insensitive</li>
+    </ul>
+    <p>Lists every single puzzles</p>
+
+    <h2>/api/v1/puzzles/PUZZLE_ID_HERE</h2>
+    <h3>GET request</h3>
+    <p>Lists one complete puzzle</p>
+
+    <h3>POST request</h3>
+    <p>Required parameters (as JSON)</p>
+    <ul>
+        <li>solution: The solution to the puzzle</li>
+    </ul>
+    <p>
+        Verify is your puzzle solution is valid, it doesn't save it anywhere,
+        nor requires authentification.
+    </p>
+</BaseLayout>

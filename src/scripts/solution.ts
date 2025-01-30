@@ -186,8 +186,8 @@ export const checkSolutionAPI = async (
 
       // Solution not inside of the profile, save it
       if (fetchedSolution[0] === undefined) {
-        const saltSolution =
-          puzzleId + userId + randomBytes(32).toString("hex");
+        const saltSolution = puzzleId + userId +
+          randomBytes(32).toString("hex");
         const saltedSolution = submission.solution.concat(saltSolution);
 
         const sha512Solution = createHash("sha512")

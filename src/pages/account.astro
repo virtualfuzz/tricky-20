@@ -3,6 +3,8 @@ import { SignIn, SignOut } from "auth-astro/components";
 import { getSession } from "auth-astro/server";
 import { db, apiKeys } from "../db/schema.ts";
 import { eq } from "drizzle-orm";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navbar from "../components/Navbar.astro";
 
 const session = await getSession(Astro.request);
 
@@ -33,108 +35,109 @@ if (session) {
 }
 ---
 
-<html>
-    <body>
-        <noscript
-            >Warning, unfortunately, for logging in, you need to turn on
-            javascript, other operations should not require javascript, if they
-            do, do not hesitate to file a bug report!</noscript
-        >
+<BaseLayout title="Account">
+    <noscript
+        >Warning, unfortunately, for logging in, you need to turn on javascript,
+        other operations should not require javascript, if they do, do not
+        hesitate to file a bug report!</noscript
+    >
 
-        <SignIn>Login</SignIn>
-        <SignOut>Logout</SignOut>
+    <Navbar />
 
-        {
-            session ? (
-                <tr>
-                    <p>Welcome {session.user?.name}</p>
-                    <form method="POST" action="/key/new">
-                        <label>
-                            Expiry date of the new API key:
-                            <input
-                                name="expireDate"
-                                type="date"
-                                min={minString}
-                                max={maxString}
-                                required
-                            />
-                        </label>
-                        <button type="submit">Generate New API Key</button>
-                    </form>
-                    {api_keys && api_keys.length > 0 ? (
-                        <table>
+    <SignIn>Login</SignIn>
+    <SignOut>Logout</SignOut>
+
+    <h1>Account</h1>
+
+    {
+        session ? (
+            <tr>
+                <h2>Welcome {session.user?.name}</h2>
+                <form method="POST" action="/key/new">
+                    <label>
+                        Expiry date of the new API key:
+                        <input
+                            name="expireDate"
+                            type="date"
+                            min={minString}
+                            max={maxString}
+                            required
+                        />
+                    </label>
+                    <button type="submit">Generate New API Key</button>
+                </form>
+                {api_keys && api_keys.length > 0 ? (
+                    <table>
+                        <tr>
+                            <th>Your Api keys</th>
+                        </tr>
+                        <tr>
+                            <th>First 8 characters</th>
+                            <th>Creation date</th>
+                            <th>Expire date</th>
+                            <th>Last used date</th>
+                            <th>Expired</th>
+                            <th>API key actions</th>
+                        </tr>
+                        {api_keys.map((api_key) => (
                             <tr>
-                                <th>Your Api keys</th>
+                                <th>{api_key.first8Chars}</th>
+                                <th>
+                                    {
+                                        api_key.creationDate
+                                            .toISOString()
+                                            .split("T")[0]
+                                    }
+                                </th>
+                                <th>
+                                    {
+                                        api_key.expireDate
+                                            .toISOString()
+                                            .split("T")[0]
+                                    }
+                                </th>
+                                <th>
+                                    {api_key.lastUsedDate
+                                        ? api_key.lastUsedDate
+                                              .toISOString()
+                                              .split("T")[0]
+                                        : "Never used before"}
+                                </th>
+                                <th>
+                                    {api_key.expireDate <= new Date()
+                                        ? "Yes"
+                                        : "No"}
+                                </th>
+                                <th>
+                                    <form method="POST" action="/key/revoke">
+                                        <input
+                                            name="apiKeyId"
+                                            type="hidden"
+                                            value={api_key.id}
+                                            required
+                                        />
+                                        <button type="submit">
+                                            Revoke and delete key
+                                        </button>
+                                    </form>
+                                </th>
                             </tr>
-                            <tr>
-                                <th>First 8 characters</th>
-                                <th>Creation date</th>
-                                <th>Expire date</th>
-                                <th>Last used date</th>
-                                <th>Expired</th>
-                                <th>API key actions</th>
-                            </tr>
-                            {api_keys.map((api_key) => (
-                                <tr>
-                                    <th>{api_key.first8Chars}</th>
-                                    <th>
-                                        {
-                                            api_key.creationDate
-                                                .toISOString()
-                                                .split("T")[0]
-                                        }
-                                    </th>
-                                    <th>
-                                        {
-                                            api_key.expireDate
-                                                .toISOString()
-                                                .split("T")[0]
-                                        }
-                                    </th>
-                                    <th>
-                                        {api_key.lastUsedDate
-                                            ? api_key.lastUsedDate
-                                                  .toISOString()
-                                                  .split("T")[0]
-                                            : "Never used before"}
-                                    </th>
-                                    <th>
-                                        {api_key.expireDate <= new Date()
-                                            ? "Yes"
-                                            : "No"}
-                                    </th>
-                                    <th>
-                                        <form
-                                            method="POST"
-                                            action="/key/revoke"
-                                        >
-                                            <input
-                                                name="apiKeyId"
-                                                type="hidden"
-                                                value={api_key.id}
-                                                required
-                                            />
-                                            <button type="submit">
-                                                Revoke and delete key
-                                            </button>
-                                        </form>
-                                    </th>
-                                </tr>
-                            ))}
-                        </table>
-                    ) : api_key_error ? (
-                        <p>
-                            Failed to find API keys for your user:{" "}
-                            {api_key_error}, please report this as a bug with
-                            the current page URL!
-                        </p>
-                    ) : (
-                        <p>You do not have any API keys.</p>
-                    )}
-                </tr>
-            ) : (
-                <p>Not logged in</p>
-            )
-        }
-    </body>
-</html>
+                        ))}
+                    </table>
+                ) : api_key_error ? (
+                    <p>
+                        Failed to find API keys for your user: {api_key_error},
+                        please report this as a bug with the current page URL!
+                    </p>
+                ) : (
+                    <p>You do not have any API keys.</p>
+                )}
+            </tr>
+        ) : (
+            <p>Not logged in</p>
+        )
+    }
+
+    <h2>How to authentificate using an API key for an API endpoint</h2>
+    <p>Add the header: "Authorization: Bearer API_KEY_HERE"</p>
+</BaseLayout>

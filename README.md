@@ -1,28 +1,40 @@
 # tricky-20
 
-Work in progress...
+This project is still under the demo/showcase phase, and
+[I still have some things planned for it](TODO.md).
 
-## making_an_account
+Tricky 20 is my attempt at making some kind of game that is playable though the
+command line.
 
-get username from platform oauth is the best option overall github / codeberg
-(not inside of auth.js) gitlab / google / ask for other options (on simpleX)
-api key
+## Screenshots
 
-- currently making soem kind of api key system
+These aren't much, since this game is mostly played though the command line.
 
-maybe we use the email and platform  for auth???
+## Development/Running it
 
+First, you need to have a .env file (that you must **KEEP PRIVATE**), or these
+variables defined in your environment.
 
-## user routes
+```env
+AUTH_SECRET= # from auth.js create a bunch of random characters and that's it
+GITHUB_CLIENT_ID= # github client id for your oauth
+GITHUB_CLIENT_SECRET= # github client secret from your github oauth
+DATABASE_URL= # the database url, postgresql is recommanded
+```
 
-/api/v1/profiles (get every user_id/platform) /api/v1/profiles/platform/ (get
-every user_id from platform) /api/v1/profiles/platform
+For development, simply run `deno task dev`.
 
-## user_database
+## Security
 
-platform: github/gitlab/codeberg/etc user_id: user id of the user from the oauth
-platform username? update other things then solutions { { puzzle_id,
-sha512sum_of_his_solution (append his user_id to the solution) } }
+Please send an email to `skewed-fade-deluxe@duck.com` if you found any security
+issues, I will try my best to fix them.
+
+Emails can be encrypted using my
+[gpg key](https://keys.openpgp.org/search?q=skewed-fade-deluxe%40duck.com) if
+wanted.
+
+Other contact info is availible down in
+[my website](https://jayden295.codeberg.page/).
 
 ## License
 

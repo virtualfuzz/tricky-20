@@ -35,7 +35,8 @@ export async function GET({ params }: APIContext) {
     return new Response(
       JSON.stringify(
         {
-          error: `Profile with ${params.id} doesn't exist, are you sure you wrote it right?`,
+          error:
+            `Profile with ${params.id} doesn't exist, are you sure you wrote it right?`,
         },
         null,
         2,
