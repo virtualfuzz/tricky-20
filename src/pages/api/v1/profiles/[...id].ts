@@ -1,4 +1,4 @@
-import { accounts, db, users } from "../../../../db/schema.ts";
+import { accounts, db, solutions, users } from "../../../../db/schema.ts";
 import { eq } from "drizzle-orm";
 import type { APIContext, APIRoute } from "astro";
 import { checkSolutionAPI } from "../../../../scripts/solution.ts";
@@ -10,18 +10,32 @@ export async function GET({ params }: APIContext) {
     throw new Error("params.id is undefined, please report this as a bug!");
   }
 
+  // Query user with provider
   const user = await db
-    .select({ id: users.id, username: users.name, provider: accounts.provider })
+    .select({
+      id: users.id,
+      username: users.name,
+      provider: accounts.provider,
+    })
     .from(users)
     .leftJoin(accounts, eq(users.id, accounts.userId))
     .where(eq(users.id, params.id));
+
+  // Query solutions from that user
+  const puzzlesSolved = await db
+    .select({
+      puzzleId: solutions.puzzleId,
+      sha512Solution: solutions.sha512Solution,
+      saltSolution: solutions.saltSolution,
+    })
+    .from(solutions)
+    .where(eq(solutions.userId, params.id));
 
   if (user.length <= 0) {
     return new Response(
       JSON.stringify(
         {
-          error:
-            `Profile with ${params.id} doesn't exist, are you sure you wrote it right?`,
+          error: `Profile with ${params.id} doesn't exist, are you sure you wrote it right?`,
         },
         null,
         2,
@@ -33,7 +47,7 @@ export async function GET({ params }: APIContext) {
     );
   }
 
-  return new Response(JSON.stringify(user[0], null, 2), {
+  return new Response(JSON.stringify({ ...user[0], puzzlesSolved }, null, 2), {
     headers: { "Content-Type": "application/json" },
   });
 }
