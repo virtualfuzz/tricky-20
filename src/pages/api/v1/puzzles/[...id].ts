@@ -1,6 +1,6 @@
 import type { APIRoute } from "astro";
 import { type CollectionEntry, getCollection, getEntry } from "astro:content";
-import { checkSolution } from "../../../../scripts/solution.ts";
+import { checkSolutionAPI } from "../../../../scripts/solution.ts";
 
 export const prerender = false;
 
@@ -26,8 +26,7 @@ export const GET: APIRoute = async ({ params }) => {
     return new Response(
       JSON.stringify(
         {
-          error:
-            `Puzzle with ${params.id} doesn't exist, are you sure you wrote it right?`,
+          error: `Puzzle with ${params.id} doesn't exist, are you sure you wrote it right?`,
         },
         null,
         2,
@@ -59,88 +58,12 @@ export const GET: APIRoute = async ({ params }) => {
 
 // POST request to actually send a solution and verify it
 export const POST: APIRoute = async ({ request, params }) => {
-  // Make sure puzzle_id and solution exists in the json input
-  let submission = undefined;
-
-  // Make sure it is proper json
-  try {
-    submission = await request.json();
-  } catch (e) {
-    let error = "";
-    if (e instanceof Error) {
-      error = e.message;
-    } else {
-      error = "CRITICAL Report as bug! An unknown error occured";
-    }
-
-    return new Response(JSON.stringify({ error }, null, 2), {
-      headers: { "Content-Type": "application/json" },
-      status: 400,
-    });
-  }
-
-  if (submission.solution === undefined) {
-    return new Response(
-      JSON.stringify({ error: "Where is the solution?" }, null, 2),
-      {
-        headers: { "Content-Type": "application/json" },
-        status: 400,
-      },
-    );
-  }
-
+  // Make sure params.id
   if (params.id === undefined) {
     throw new Error(
       "For some reason params.id is undefined? Please report this as a bug with the current url!",
     );
   }
 
-  let valid_solution = false;
-  try {
-    valid_solution = await checkSolution(params.id, submission.solution);
-  } catch (e) {
-    let error = "";
-    if (e instanceof Error) {
-      error = e.message;
-    } else {
-      error = "CRITICAL Report as bug! An unknown error occured";
-    }
-
-    return new Response(
-      JSON.stringify(
-        {
-          error,
-        },
-        null,
-        2,
-      ),
-      {
-        headers: { "Content-Type": "application/json" },
-        status: 400,
-      },
-    );
-  }
-
-  // Check the hash and return the response
-  let response;
-  let status;
-  if (valid_solution === true) {
-    status = 200;
-    response = {
-      valid_solution: true,
-      message: "You got yourself a valid solution, congrats!",
-    };
-  } else {
-    status = 400;
-    response = {
-      valid_solution: false,
-      message:
-        "Uh oh, that's the wrong solution, make sure you wrote it correctly, the spaces matter!",
-    };
-  }
-
-  return new Response(JSON.stringify(response, null, 2), {
-    headers: { "Content-Type": "application/json" },
-    status: status,
-  });
+  return await checkSolutionAPI(request, params.id);
 };
