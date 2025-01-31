@@ -6,9 +6,16 @@ This project is still under the demo/showcase phase, and
 Tricky 20 is my attempt at making some kind of game that is playable though the
 command line.
 
+It's basically a bunch of puzzles that are fetchable though an API and can mostly
+be done using the command line.
+
+You can [get more information and play it here](https://tricky.jayden295.hackclub.app)
+
 ## Screenshots
 
 These aren't much, since this game is mostly played though the command line.
+
+![Screenshot of someone listing out every puzzle using the API through the curl command](screenshots/api_curling.png)
 
 ## Development/Running it
 
@@ -21,6 +28,11 @@ GITHUB_CLIENT_ID= # github client id for your oauth
 GITHUB_CLIENT_SECRET= # github client secret from your github oauth
 DATABASE_URL= # the database url, postgresql is recommanded
 ```
+
+Then, install the project dependencies though `deno install`
+
+Setup the database by running `deno task drizzle-kit generate` and
+`deno task drizzle-kit migrate`
 
 For development, simply run `deno task dev`.
 

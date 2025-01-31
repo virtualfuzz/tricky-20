@@ -6,7 +6,7 @@ import deno from "@deno/astro-adapter";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://example.org/", // TODO: Temporary until I work on a website
+  site: "https://tricky.jayden295.hackclub.app/", // TODO: Temporary until I work on a website
   integrations: [
     sitemap({
       i18n: {
