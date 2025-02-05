@@ -6,6 +6,8 @@ This project is still under the demo/showcase phase, and
 Tricky 20 is my attempt at making some kind of game that is playable though the
 command line.
 
+DOCULMENT HOW IT WORKS
+
 It's basically a bunch of puzzles that are fetchable though an API and can mostly
 be done using the command line.
 
