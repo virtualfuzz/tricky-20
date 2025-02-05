@@ -6,15 +6,14 @@ This project is still under the demo/showcase phase, and
 Tricky 20 is my attempt at making some kind of game that is playable though the
 command line.
 
-DOCULMENT HOW IT WORKS
-
-It's basically a bunch of puzzles that are fetchable though an API and can mostly
-be done using the command line.
+It's basically a bunch of puzzles that are fetchable though an API and can
+mostly be done using the command line.
 
 The website looks very barebones since you play the game though an API, I kind
 of like the barebones aesthetic too.
 
-You can [get more information and play it here](https://tricky.jayden295.hackclub.app)
+You can
+[get more information and play it here](https://tricky.jayden295.hackclub.app)
 
 ## Screenshots
 
@@ -40,6 +39,8 @@ Setup the database by running `deno task drizzle-kit generate` and
 `deno task drizzle-kit migrate`
 
 For development, simply run `deno task dev`.
+
+For production, run `deno task build` and `deno task preview`.
 
 ## Security
 

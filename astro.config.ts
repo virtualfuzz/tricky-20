@@ -2,7 +2,7 @@ import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import compress from "@playform/compress";
 import auth from "auth-astro";
-import deno from "@deno/astro-adapter";
+import node from "@astrojs/node";
 
 // https://astro.build/config
 export default defineConfig({
@@ -20,7 +20,9 @@ export default defineConfig({
     auth(),
   ],
   output: "server",
-  adapter: deno(),
+  adapter: node({
+    mode: "standalone",
+  }),
   prefetch: {
     prefetchAll: true,
   },
