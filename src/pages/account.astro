@@ -58,7 +58,7 @@ if (session) {
         session ? (
             <tr>
                 <h2>Welcome {session.user?.name}</h2>
-                <form method="POST" action="/key/new">
+                <form method="POST" action="/key/new" data-astro-reload>
                     <label>
                         Expiry date of the new API key:
                         <input
@@ -114,7 +114,11 @@ if (session) {
                                         : "No"}
                                 </th>
                                 <th>
-                                    <form method="POST" action="/key/revoke">
+                                    <form
+                                        method="POST"
+                                        action="/key/revoke"
+                                        data-astro-reload
+                                    >
                                         <input
                                             name="apiKeyId"
                                             type="hidden"
