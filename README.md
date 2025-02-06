@@ -38,9 +38,19 @@ Then, install the project dependencies though `deno install`
 Setup the database by running `deno task drizzle-kit generate` and
 `deno task drizzle-kit migrate`
 
+### Development
+
 For development, simply run `deno task dev`.
 
+### Production
+
 For production, run `deno task build` and `deno task preview`.
+
+By default, we build it using the node.js backend as a standalone build.\
+You will probably need to add HOST=0.0.0.0 for it to work.\
+[Official Astro documentation for node.js builds](https://docs.astro.build/en/guides/integrations-guide/node/#standalone)
+
+Other backends may work as well, but aren't not tested.
 
 ## Security
 
