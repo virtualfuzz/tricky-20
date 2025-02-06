@@ -4,9 +4,8 @@ import compress from "@playform/compress";
 import auth from "auth-astro";
 import node from "@astrojs/node";
 
-// https://astro.build/config
 export default defineConfig({
-  site: "https://tricky.jayden295.hackclub.app/", // TODO: Temporary until I work on a website
+  site: "https://tricky.jayden295.hackclub.app",
   integrations: [
     sitemap({
       i18n: {

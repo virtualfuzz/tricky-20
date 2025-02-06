@@ -67,8 +67,8 @@ export const POST: APIRoute = async ({ request }) => {
       JSON.stringify(
         {
           error: "We require expireDate to be passed in the form data.\
-            expireDate is the date in which this API key expires and is unusable.\
-            expireDate also needs to be in the future and not further then 1 year in the future.",
+expireDate is the date in which this API key expires and is unusable.\
+expireDate also needs to be in the future and not further then 1 year in the future.",
         },
         null,
         2,
@@ -90,8 +90,8 @@ export const POST: APIRoute = async ({ request }) => {
         {
           error: "expireDate is too far into the future",
           message: "expireDate cannot be further then 1 year into the future.\
-          expireDate is the date in which this API key expires and is unusable.\
-            expireDate also needs to be in the future and not further then 1 year in the future.",
+expireDate is the date in which this API key expires and is unusable.\
+expireDate also needs to be in the future and not further then 1 year in the future.",
         },
         null,
         2,

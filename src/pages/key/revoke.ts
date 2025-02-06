@@ -55,7 +55,7 @@ export const POST: APIRoute = async ({ request }) => {
       JSON.stringify(
         {
           error: "We require apiKeyId to be passed in the form data.\
-            apiKeyId is the internal id of the api key.",
+apiKeyId is the internal id of the api key.",
         },
         null,
         2,
@@ -78,7 +78,7 @@ export const POST: APIRoute = async ({ request }) => {
       JSON.stringify(
         {
           error: "Couldn't find API key with apiKeyId as an id.\
-              apiKeyId is the internal id of the api key.",
+apiKeyId is the internal id of the api key.",
         },
         null,
         2,

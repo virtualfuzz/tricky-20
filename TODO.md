@@ -1,7 +1,6 @@
 # Features
 
-- Make it run properly when building it (right now I deployed it with dev)
-  - try to switch to deno native things? (deno-postgres?)
+- Fix API key generation
 - Auto deploy to production
 - Ability to export the whole profile database (/api/v1/profiles?export=true)
 - Automatic update of the username when the user logs in with a new one
