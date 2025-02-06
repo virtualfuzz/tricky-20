@@ -11,7 +11,7 @@ export async function GET({ request }: APIContext) {
 
   const users_to_show = await db
     .select({
-      profile_id: users.id,
+      user_id: users.id,
       username: users.name,
       provider: accounts.provider,
     })
@@ -25,9 +25,9 @@ export async function GET({ request }: APIContext) {
     );
 
   const users_hashmap = users_to_show.reduce(
-    (acc: { [key: string]: typeof user & { profile_url: string } }, user) => {
-      acc[user.profile_id] = {
-        profile_url: `/api/v1/profiles/${user.profile_id}`,
+    (acc: { [key: string]: typeof user & { user_url: string } }, user) => {
+      acc[user.user_id] = {
+        user_url: `/api/v1/users/${user.user_id}`,
         ...user,
       };
       return acc;

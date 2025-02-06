@@ -13,7 +13,7 @@ export async function GET({ params }: APIContext) {
   // Query user with provider
   const user = await db
     .select({
-      id: users.id,
+      user_id: users.id,
       username: users.name,
       provider: accounts.provider,
     })
@@ -36,7 +36,7 @@ export async function GET({ params }: APIContext) {
       JSON.stringify(
         {
           error:
-            `Profile with ${params.id} doesn't exist, are you sure you wrote it right?`,
+            `User with ${params.id} doesn't exist, are you sure you wrote it right?`,
         },
         null,
         2,
