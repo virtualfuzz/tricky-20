@@ -46,7 +46,10 @@ For development, simply run `deno task dev`.
 
 ### Production
 
-For production, run `deno task build` and `deno task preview`.
+For production, run `node task build` and `deno task preview`.
+
+For building, you need to use node, unfortunately astro/deno
+don't work very well together, I had build failures with deno.
 
 By default, we build it using the node.js backend as a standalone build.\
 You will probably need to add HOST=0.0.0.0 for it to work.\
