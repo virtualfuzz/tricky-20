@@ -11,11 +11,11 @@ import type { AdapterAccount } from "next-auth/adapters";
 import "dotenv/config";
 import process from "node:process";
 
-if (process.env.DATABASE_URL === undefined) {
+if (process.env.AUTH_DRIZZLE_URL === undefined) {
   throw new Error("DATABASE_URL is undefined, define it in .env");
 }
 
-const pool = postgres(process.env.DATABASE_URL, { max: 1 });
+const pool = postgres(process.env.AUTH_DRIZZLE_URL, { max: 1 });
 
 export const db = drizzle(pool);
 

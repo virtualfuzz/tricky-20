@@ -1,5 +1,6 @@
 // auth.config.ts
 import GitHub from "@auth/core/providers/github";
+import GitLab from "@auth/core/providers/gitlab";
 import { defineConfig } from "auth-astro";
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import { db } from "./src/db/schema.ts";
@@ -8,14 +9,12 @@ export default defineConfig({
   adapter: DrizzleAdapter(db),
   providers: [
     GitHub({
-      clientId: import.meta.env.GITHUB_CLIENT_ID,
-      clientSecret: import.meta.env.GITHUB_CLIENT_SECRET,
-      profile(profile) {
-        return {
-          id: profile.id.toString(),
-          name: profile.login,
-        };
-      },
+      clientId: import.meta.env.AUTH_GITHUB_ID,
+      clientSecret: import.meta.env.AUTH_GITHUB_SECRET,
+    }),
+    GitLab({
+      clientId: import.meta.env.AUTH_GITLAB_ID,
+      clientSecret: import.meta.env.AUTH_GITLAB_SECRET,
     }),
   ],
   callbacks: {

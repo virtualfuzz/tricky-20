@@ -9,7 +9,6 @@ export async function GET({ request }: APIContext) {
   const username = searchParams.get("username");
   const provider = searchParams.get("provider");
   const needExport = searchParams.get("export");
-  console.log(needExport);
 
   const users_to_show = await db
     .select({
