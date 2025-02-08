@@ -80,7 +80,7 @@ export const checkSolutionAPI = async (
       error = "CRITICAL Report as bug! An unknown error occured";
     }
 
-    return new Response(JSON.stringify({ error }, null, 2), {
+    return new Response(JSON.stringify({ error }, null, "\t"), {
       headers: { "Content-Type": "application/json" },
       status: 400,
     });
@@ -88,7 +88,7 @@ export const checkSolutionAPI = async (
 
   if (submission.solution === undefined) {
     return new Response(
-      JSON.stringify({ error: "Where is the solution?" }, null, 2),
+      JSON.stringify({ error: "Where is the solution?" }, null, "\t"),
       {
         headers: { "Content-Type": "application/json" },
         status: 400,
@@ -114,7 +114,7 @@ export const checkSolutionAPI = async (
             error,
           },
           null,
-          2,
+          "\t",
         ),
         {
           headers: { "Content-Type": "application/json" },
@@ -134,7 +134,7 @@ export const checkSolutionAPI = async (
             "For some reason the puzzleId is undefined, please check documentation. If you are doing this correctly, please report this as a bug with the current url!",
         },
         null,
-        2,
+        "\t",
       ),
       {
         headers: { "Content-Type": "application/json" },
@@ -160,7 +160,7 @@ export const checkSolutionAPI = async (
           error,
         },
         null,
-        2,
+        "\t",
       ),
       {
         headers: { "Content-Type": "application/json" },
@@ -235,7 +235,7 @@ export const checkSolutionAPI = async (
     response = { ...response, userId, saved_into_your_profile, save_message };
   }
 
-  return new Response(JSON.stringify(response, null, 2), {
+  return new Response(JSON.stringify(response, null, "\t"), {
     headers: { "Content-Type": "application/json" },
     status: status,
   });

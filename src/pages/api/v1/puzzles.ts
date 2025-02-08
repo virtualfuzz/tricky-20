@@ -30,7 +30,7 @@ export async function GET({ request }: APIContext) {
     {},
   );
 
-  return new Response(JSON.stringify(puzzleHashmap, null, 2), {
+  return new Response(JSON.stringify(puzzleHashmap, null, "\t"), {
     headers: { "Content-Type": "application/json" },
   });
 }

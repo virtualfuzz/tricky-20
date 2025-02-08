@@ -26,9 +26,6 @@ export async function GET({ request }: APIContext) {
       ),
     );
 
-  // if export then add the puzzlesSolved from each user (costly so dont do it by default)
-
-  // now only do this
   // Fetch data for all users asynchronously
   const usersWithPuzzles = await Promise.all(
     users_to_show.map(async (user) => {
@@ -63,7 +60,7 @@ export async function GET({ request }: APIContext) {
     {} as Record<string, (typeof usersWithPuzzles)[number]>,
   );
 
-  return new Response(JSON.stringify(users_hashmap, null, 2), {
+  return new Response(JSON.stringify(users_hashmap, null, "\t"), {
     headers: { "Content-Type": "application/json" },
   });
 }

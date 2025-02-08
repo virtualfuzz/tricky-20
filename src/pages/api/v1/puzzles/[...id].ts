@@ -30,7 +30,7 @@ export const GET: APIRoute = async ({ params }) => {
             `Puzzle with ${params.id} doesn't exist, are you sure you wrote it right?`,
         },
         null,
-        2,
+        "\t",
       ),
       {
         headers: { "Content-Type": "application/json" },
@@ -52,7 +52,7 @@ export const GET: APIRoute = async ({ params }) => {
     solution: "I just wish I could see another perspective, one-",
   };
 
-  return new Response(JSON.stringify(puzzle.data, null, 2), {
+  return new Response(JSON.stringify(puzzle.data, null, "\t"), {
     headers: { "Content-Type": "application/json" },
   });
 };

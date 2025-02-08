@@ -16,7 +16,7 @@ export function GET() {
           "Once if gets a POST request, it looks into the formData and gets expireDate (which is the expire date of the API key), then it creates and adds a new API key.",
       },
       null,
-      2,
+      "\t",
     ),
     {
       headers: { "Content-Type": "application/json" },
@@ -36,7 +36,7 @@ export const POST: APIRoute = async ({ request }) => {
             "Unauthorized: You are not logged in, do this from the /account page.",
         },
         null,
-        2,
+        "\t",
       ),
       {
         headers: { "Content-Type": "application/json" },
@@ -71,7 +71,7 @@ expireDate is the date in which this API key expires and is unusable.\
 expireDate also needs to be in the future and not further then 1 year in the future.",
         },
         null,
-        2,
+        "\t",
       ),
       {
         headers: { "Content-Type": "application/json" },
@@ -94,7 +94,7 @@ expireDate is the date in which this API key expires and is unusable.\
 expireDate also needs to be in the future and not further then 1 year in the future.",
         },
         null,
-        2,
+        "\t",
       ),
       {
         headers: { "Content-Type": "application/json" },
@@ -116,7 +116,7 @@ expireDate also needs to be in the future and not further then 1 year in the fut
           expireDate also needs to be in the future and not further then 1 year in the future.",
         },
         null,
-        2,
+        "\t",
       ),
       {
         headers: { "Content-Type": "application/json" },
@@ -150,7 +150,7 @@ expireDate also needs to be in the future and not further then 1 year in the fut
         apiKey,
       },
       null,
-      2,
+      "\t",
     ),
     {
       headers: { "Content-Type": "application/json" },

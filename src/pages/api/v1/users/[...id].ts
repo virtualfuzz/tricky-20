@@ -29,7 +29,7 @@ export async function GET({ params }: APIContext) {
             `User with ${params.id} doesn't exist, are you sure you wrote it right?`,
         },
         null,
-        2,
+        "\t",
       ),
       {
         headers: { "Content-Type": "application/json" },
@@ -48,9 +48,12 @@ export async function GET({ params }: APIContext) {
     .from(solutions)
     .where(eq(solutions.userId, params.id));
 
-  return new Response(JSON.stringify({ ...user[0], puzzlesSolved }, null, 2), {
-    headers: { "Content-Type": "application/json" },
-  });
+  return new Response(
+    JSON.stringify({ ...user[0], puzzlesSolved }, null, "\t"),
+    {
+      headers: { "Content-Type": "application/json" },
+    },
+  );
 }
 
 export const POST: APIRoute = async ({ request }) => {
