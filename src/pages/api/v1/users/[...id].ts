@@ -21,16 +21,6 @@ export async function GET({ params }: APIContext) {
     .leftJoin(accounts, eq(users.id, accounts.userId))
     .where(eq(users.id, params.id));
 
-  // Query solutions from that user
-  const puzzlesSolved = await db
-    .select({
-      puzzleId: solutions.puzzleId,
-      sha512Solution: solutions.sha512Solution,
-      saltSolution: solutions.saltSolution,
-    })
-    .from(solutions)
-    .where(eq(solutions.userId, params.id));
-
   if (user.length <= 0) {
     return new Response(
       JSON.stringify(
@@ -47,6 +37,16 @@ export async function GET({ params }: APIContext) {
       },
     );
   }
+
+  // Query solutions from that user
+  const puzzlesSolved = await db
+    .select({
+      puzzleId: solutions.puzzleId,
+      sha512Solution: solutions.sha512Solution,
+      saltSolution: solutions.saltSolution,
+    })
+    .from(solutions)
+    .where(eq(solutions.userId, params.id));
 
   return new Response(JSON.stringify({ ...user[0], puzzlesSolved }, null, 2), {
     headers: { "Content-Type": "application/json" },
