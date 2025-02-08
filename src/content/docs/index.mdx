@@ -1,0 +1,27 @@
+---
+title: What is tricky-20?
+description: Tricky 20 is a collection of a bunch of computer puzzles to solve.
+template: splash
+hero:
+  tagline: Tricky 20 is a collection of computer puzzles to solve.
+  actions:
+    - text: How to play
+      link: /reference/api
+      icon: right-arrow
+---
+
+import { Card, CardGrid, LinkCard } from "@astrojs/starlight/components";
+
+## What is that?
+
+<CardGrid>
+  <Card icon="puzzle" title="Collection of computer puzzles">They aren't too hard, I think.</Card>
+
+  <Card icon="seti:json" title="Only accessible though an API">Those puzzles are only accessible though
+the API. I decided to do it like that because it seems more fun and more hacker-ish to me.</Card>
+</CardGrid>
+
+<LinkCard
+  title="Codeberg repository, you can also report bugs there!"
+  href="https://codeberg.org/Jayden295/tricky-20"
+/>

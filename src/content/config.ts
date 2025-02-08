@@ -1,5 +1,7 @@
 import { defineCollection, z } from "astro:content";
 import { glob } from "astro/loaders";
+import { docsLoader } from "@astrojs/starlight/loaders";
+import { docsSchema } from "@astrojs/starlight/schema";
 
 const puzzles = defineCollection({
   loader: glob({ pattern: "**/*.json", base: "./src/content/puzzles" }),
@@ -19,4 +21,7 @@ const puzzles = defineCollection({
   }),
 });
 
-export const collections = { puzzles };
+export const collections = {
+  puzzles,
+  docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
+};
