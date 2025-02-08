@@ -21,7 +21,6 @@ export default defineConfig({
     starlight({
       title: "tricky-20",
       head: [
-        // Example: add Fathom analytics script tag.
         {
           tag: "meta",
           attrs: {
@@ -51,10 +50,10 @@ export default defineConfig({
         },
       ],
       components: {
-        // Override the default `SocialIcons` component.
         Header: "./src/components/Header.astro",
         MobileMenuFooter: "./src/components/MobileMenuFooter.astro",
       },
+      credits: true,
     }),
   ],
   output: "server",

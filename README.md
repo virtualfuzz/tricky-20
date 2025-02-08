@@ -28,11 +28,11 @@ variables defined in your environment.
 
 ```env
 AUTH_SECRET= # for auth.js create a bunch of random characters and that's it
+AUTH_DRIZZLE_URL= # database url, postgresql recommanded
 AUTH_GITHUB_ID= # github oauth client id
 AUTH_GITHUB_SECRET= # github oauth client secret
 AUTH_GITLAB_ID= # gitlab oauth client id
 AUTH_GITLAB_SECRET= # gitlab oauth secret id
-AUTH_DRIZZLE_URL= # database url, postgresql recommanded
 ```
 
 Then, install the project dependencies though `deno install`
@@ -48,8 +48,8 @@ For development, simply run `deno task dev`.
 
 For production, run `npm run build` and `deno task preview`.
 
-For building, you need to use npm, unfortunately astro/deno don't work very
-well together, I had build failures with deno.
+For building, you need to use npm, unfortunately astro/deno don't work very well
+together, I had build failures with deno.
 
 By default, we build it using the node.js backend as a standalone build.\
 You will probably need to add HOST=0.0.0.0 for it to work.\
