@@ -2,21 +2,22 @@
   "puzzle_id": "tutorials/intro",
   "slug": "tutorials/intro",
   "difficulty": "tutorial",
-  "requirements": "linux terminal (recommanded) with curl command (or anything to interact with the API!)",
+  "requirements": "linux terminal (recommanded) with curl command (or anything to interact with the API!), and a PDF viewer.",
   "you_will_learn": "learn how to play this game and interact with an API",
-  "description": "Just read the message that you downloaded and follow instructions!",
+  "description": "Just open the PDF that you downloaded and follow instructions!",
   "vocabulary": [
     { "api": "Application Programming Interface" },
     {
       "linux terminal": "A way to interact with a linux system using the terminal"
-    }
+    },
+    { "PDF": "Portable Document Format" }
   ],
   "hints": [
     "Hints are encrypted using a caesar cipher: zpv dbo bmxbzt tfbsdi vq pomjof xibu epft KTPO nfbo gps fybnqmf, j tfnj-joufoujpobmmz epo'u fyqmbjo fwfszuijoh tp zpv mfbso ipx up tfbsdi uijoht po uif joufsxfct!",
     "Jo dvsm, zpv dbo tfoe ebub vtjoh QPTU xjui uif -e '{variable: value}' pqujpo!"
   ],
-  "goal": "Just read the message you downloaded and follow instructions.",
-  "download": "/xoxo/intro.md",
+  "goal": "Instructions on the poster.",
+  "download": "/club/potential-minimal-poster.md",
   "USED_INTERNALLY_salt_of_solution": "im_prepared_im_prepared",
   "USED_INTERNALLY_sha512_of_solution": "02b0f477340ad3ba84f50c3899acb2feb695a9c7d0dcf48be7b1a00768e9309a3c015c2ea7a3df068935d25113d423f4d368ad081863dd3694abe84f603c99fa"
 }
