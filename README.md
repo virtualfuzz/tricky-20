@@ -84,3 +84,8 @@ PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License along with
 this program. If not, see <https://www.gnu.org/licenses/>.
+
+## Project websites
+
+This is not the only website made for tricky-20, here are the others:
+[https://github.com/very-cool-programming-club173/website](https://github.com/very-cool-programming-club173/website)
