@@ -1,6 +1,6 @@
 {
-  "puzzle_id": "tutorials/intro",
-  "slug": "tutorials/intro",
+  "puzzle_id": "init_1/intro",
+  "slug": "init_1/intro",
   "difficulty": "tutorial",
   "requirements": "linux terminal (recommanded) with curl command (or anything to interact with the API!), and a PDF viewer.",
   "you_will_learn": "learn how to play this game and interact with an API",

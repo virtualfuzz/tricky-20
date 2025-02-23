@@ -1,6 +1,6 @@
 {
-  "puzzle_id": "tutorials/hashy_hashy",
-  "slug": "tutorials/hashy_hashy",
+  "puzzle_id": "init_1/hashy_hashy",
+  "slug": "init_1/hashy_hashy",
   "difficulty": "tutorial",
   "requirements": "linux terminal",
   "you_will_learn": "learn how to use sha256/sha512 to solve puzzles",

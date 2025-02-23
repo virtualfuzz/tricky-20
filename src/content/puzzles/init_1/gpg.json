@@ -1,0 +1,23 @@
+{
+  "puzzle_id": "init_1/gpg",
+  "slug": "init_1/gpg",
+  "difficulty": "tutorial",
+  "requirements": "gpg program",
+  "you_will_learn": "learn how to use gpg",
+  "description": "You received a gpg signed file and want to open it, it would be nice to also verify its signature. GPG key of the file: https://keys.openpgp.org/search?q=D2EBCB7EBE996E255A93FA23075DCC6B5CC6258B",
+  "vocabulary": [
+    {
+      "gpg": "gnu privacy guard, basically a program to sign/encrypt/verify/decrypt files"
+    },
+    { "signature": "same meaning as irl, but means a digital signature" }
+  ],
+  "hints": [
+    "D .wjc iloh lv dovr nqrz dv d .wdu.jc iloh.",
+    ".qxo.dw fp qeb Ifkru bnrfsxibkq lc .wfm cfib",
+    "Frqixvlqjob, wr uhdg d vljqhg sjs iloh, brx pxvw uxq jsj --ghfubsw qdph_ri_iloh"
+  ],
+  "goal": "Find the gpg signed file and read it, instructions are inside.",
+  "download": "/Downloads/c128593062174286120.tgz",
+  "USED_INTERNALLY_salt_of_solution": "cause_whenever_i_choose_to_remain",
+  "USED_INTERNALLY_sha512_of_solution": "de5377caaaf924a86096625a3e78830334e5ae955ca9122e6a54fc269974ab19ccb51ca40f0363050b9ded004a6f7d149ed7a763c6df1acb9568d1f8db3d1dc5"
+}
