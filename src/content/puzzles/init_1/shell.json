@@ -1,0 +1,23 @@
+{
+  "puzzle_id": "init_1/shell",
+  "slug": "init_1/shell",
+  "difficulty": "tutorial",
+  "requirements": "linux shell",
+  "you_will_learn": "learn how to interact with the linux shell",
+  "description": "You received a backup of a directory containing documents, find the URL contained inside of a file using the Linux terminal. Commands you could use: tar, cd, ls, cat, (possibly grep). You can use the internet to search the meaning of these commands.",
+  "vocabulary": [
+    {
+      "shell": "a way to interact with the operating system using commands"
+    },
+    { "URL": "fancy term for 'link'" }
+  ],
+  "hints": [
+    "Brx fdq xvh wkh pdq frppdqg wr xqghuvwdqg zkdw grhv dq lqglylgxdo frppdqg gr.",
+    ".wdu.jc ilohv duh wkh htxlydohqw ri d cls iloh lq Olqxa, brx fdq xvh wkh wdu frppdqg wr xqcls wkhp (wdu -ai qdph_ri_iloh).",
+    "Li brx grq'w nqrz krz wr jhw Olqxa, Zlqgrzv kdv ZVO (orrn lw xs rqolqh), zkloh PdfRV lv xqla-edvhg (edvlfdoob nlqgd olnh Olqxa), zklfk lv jrrg hqrxjk."
+  ],
+  "goal": "Find the file containing the URL, the URL is the puzzle key.",
+  "download": "/Downloads/school.tar.gz",
+  "USED_INTERNALLY_salt_of_solution": "this-is-getting-a-bit-boring",
+  "USED_INTERNALLY_sha512_of_solution": "3b5c704ebeed7f837dd689c87e16ee1207cd417d34e0020570450915c99369a466750dcf2462b9142ec977f483be8b6fc3b7515895f8b9ad043ff4d6005e8210"
+}
