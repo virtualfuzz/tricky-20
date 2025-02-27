@@ -1,0 +1,17 @@
+{
+  "puzzle_id": "init_1/search",
+  "slug": "init_1/search",
+  "difficulty": "tutorial",
+  "requirements": "a web browser",
+  "you_will_learn": "learn how to do search on the internet, which is pretty much required for this",
+  "description": "instructions available here, use your web browser to read this: https://very-cool-programming-club173.github.io/website/blog/small-club-challenge",
+  "vocabulary": [],
+  "hints": [
+    "doha kvlz aol jvtthuk 'thu' wypua ha 00:30 ilmvyl jvttpa 84ikl8",
+    "hss svdlyjhzl, uv zwhjlz ha aol zahya huk luk, kvu'a pujsbkl aol ihjrzshzo u"
+  ],
+  "goal": "just answer the question in the blog post, all lowercase",
+  "download": "https://raw.githubusercontent.com/very-cool-programming-club173/website/refs/heads/main/blog/small-club-challenge.md",
+  "USED_INTERNALLY_salt_of_solution": "lets_gooooo",
+  "USED_INTERNALLY_sha512_of_solution": "56acb696a27be4423216b32224677016746a0419569b2ac7d6956e6e181a7fa49a84ad48f36db9ce10064dc677817fbe6e4bb8be25fc63a5fd552f294d40084f"
+}
