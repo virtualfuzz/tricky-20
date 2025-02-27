@@ -10,7 +10,7 @@ const puzzles = defineCollection({
     slug: z.string(),
     difficulty: z.string(),
     requirements: z.string(),
-    you_will_learn: z.string(),
+    you_will_learn: z.string().optional(),
     description: z.string(),
     vocabulary: z.array(z.unknown()),
     hints: z.array(z.string()),

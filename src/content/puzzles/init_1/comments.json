@@ -1,0 +1,18 @@
+{
+  "puzzle_id": "init_1/comments",
+  "slug": "init_1/comments",
+  "difficulty": "tutorial",
+  "requirements": "a web browser or git client, gpg client",
+  "description": "A password is hidden somewhere inside of: https://github.com/very-cool-programming-club173/website , the password is the puzzle key",
+  "vocabulary": [],
+  "hints": [
+    "Mrxip wykkiwxw xlex xli tewwasvh mw egxyeppc wmkrih ywmrk e TKT oic, ws csy'pp lezi xs higvctx mx xs egxyeppc kix xli tewwasvh.",
+    "Csy hsr'x vieppc lezi xs ywi jergc gsqqerhw, nywx vieh iegl jmpi sri fc sri erh csy'pp jmrh mx uymgopc.",
+    "E tkt irgvctxih/wmkrih xibx wxevxw amxl -----FIKMR TKT QIWWEKI----- erh irhw amxl -----IRH TKT QIWWEKI-----",
+    "Alir csyv tyxxmrk csyv TKT qiwweki fego mrxs e jmpi, csy lezi xs viqszi xli #, xlswi evi gsqqirxw erh lmhi xli TKT qiwweki."
+  ],
+  "goal": "Find the password inside of https://github.com/very-cool-programming-club173/website , the password is the puzzle key.",
+  "download": "https://github.com/very-cool-programming-club173/website",
+  "USED_INTERNALLY_salt_of_solution": "i_was_too_tired_okay",
+  "USED_INTERNALLY_sha512_of_solution": "9aa018379b29eeab356dde54574bcce11761e7bf8e35b7871755a5fc007a1d600892fc438e696d6349e585b470ce7270b1d3f3783519b2f7d962894bb3cf81e0"
+}

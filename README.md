@@ -9,8 +9,9 @@ command line.
 It's basically a bunch of puzzles that are fetchable though an API and can
 mostly be done using the command line.
 
-There are other repositories/content that is made for tricky-20 that isn't in this repo,
-but they are also made for tricky-20 specifically (expect for one blog post).
+There are other repositories/content that is made for tricky-20 that isn't in
+this repo, but they are also made for tricky-20 specifically (expect for one
+blog post).
 
 You can
 [get more information and play it here](https://tricky.jayden295.hackclub.app)
