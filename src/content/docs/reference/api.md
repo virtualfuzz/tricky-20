@@ -1,6 +1,6 @@
 ---
 title: API Reference
-description: A reference page in my new Starlight docs site.
+description: Documentation of the tricky-20 API
 ---
 
 v1.0.0
@@ -8,6 +8,8 @@ v1.0.0
 Access it though /api/v1/
 
 You can use `curl` to interact with this API though the terminal.
+
+Your user ID is is available [here](/account).
 
 ## /api/v1/users
 

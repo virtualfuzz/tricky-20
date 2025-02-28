@@ -36,9 +36,6 @@ if (session) {
 ---
 
 <StarlightPage frontmatter={{ title: "Account", template: "splash" }}>
-    <SignIn>Login</SignIn>
-    <SignOut>Logout</SignOut>
-
     <noscript>
         <Aside type="caution"
             >Warning, unfortunately, for logging in, you need to turn on
@@ -55,7 +52,10 @@ if (session) {
     {
         session ? (
             <>
+                <SignOut>Logout</SignOut>
                 <h2>Welcome {session.user?.name}</h2>
+                <p>Your user ID is {session.user?.id}</p>
+                <a href={`/api/v1/users/${session.user?.id}`}>Your profile</a>
                 <form method="POST" action="/key/new" data-astro-reload>
                     <label>
                         Expiry date of the new API key:
@@ -141,6 +141,7 @@ if (session) {
                 )}
             </>
         ) : (
+            <SignIn>Login/Create Account</SignIn>
             <p>Not logged in</p>
         )
     }
