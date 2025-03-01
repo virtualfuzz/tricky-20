@@ -52,6 +52,10 @@ export default defineConfig({
           label: "Reference",
           autogenerate: { directory: "reference" },
         },
+        {
+          label: "Release Notes",
+          autogenerate: { directory: "release-notes" },
+        },
       ],
       components: {
         Header: "./src/components/Header.astro",

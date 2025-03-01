@@ -9,10 +9,11 @@ process, and doesn't require authentication (in fact, authentication attempts
 will be ignored if you do it on an API route that doesn't require one).
 
 1. In order to save your progress, once you finished a puzzle, find your user
-  profile URL [in your accounts page](/account). (You can also
-  [search it using the API and your username](/reference/api/#get-request))
+   profile URL [in your accounts page](/account). (You can also
+   [search it using the API and your username](/reference/api/#get-request))
 
-2. Do a [authenticated](/tutorials/api-key) POST request to your user profile URL, with the following JSON body:
+2. Do a [authenticated](/tutorials/api-key) POST request to your user profile
+   URL, with the following JSON body:
 
 ```json
 {
