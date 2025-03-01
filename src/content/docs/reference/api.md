@@ -5,7 +5,7 @@ description: Documentation of the tricky-20 API
 
 v1.0.0
 
-Access it though /api/v1/
+Access it though [/api/v1/](/api/v1/)
 
 You can use `curl` to interact with this API though the terminal.
 
