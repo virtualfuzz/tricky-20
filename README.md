@@ -68,7 +68,7 @@ Emails can be encrypted using my
 wanted.
 
 Other contact info is availible down in
-[my website](https://jayden295.codeberg.page/).
+[my website](https://virtualfuzz.codeberg.page/).
 
 ## License
 
